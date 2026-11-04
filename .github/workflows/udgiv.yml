@@ -1,0 +1,57 @@
+# Uploader bjarvik.com til Simply via FTPS. Kører, når nogen pusher til main (udgiv-bjarvik.sh på Mac'en),
+# og kan startes manuelt under "Actions". Siderne bygges på Mac'en, så her bygges intet.
+#
+# Kræver tre hemmeligheder (Settings > Secrets and variables > Actions):
+#   FTP_SERVER    ftp.simply.com (port 21, FTPS)
+#   FTP_USERNAME  FTP-brugernavnet til bjarvik.com fra Simply
+#   FTP_PASSWORD  FTP-adgangskoden fra Simply
+# Valgfri variabel FTP_SERVER_DIR (standard: public_html/).
+name: Udgiv siden
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: udgiv
+  cancel-in-progress: false
+
+jobs:
+  udgiv:
+    runs-on: ubuntu-latest
+    # Første upload er alle ca. 1.300 filer (34 MB) og kan tage en time over FTPS. Derefter kun ændrede filer.
+    timeout-minutes: 120
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Kun de offentlige filer kommer på webhotellet; .htaccess skal med (én adresse og https)
+      - name: Saml de offentlige filer
+        run: |
+          rsync -a --delete \
+            --include '/.htaccess' \
+            --exclude '.*' --exclude '_deploy' --exclude 'README.md' \
+            ./ _deploy/
+          echo "Filer til upload: $(find _deploy -type f | wc -l)"
+
+      - name: Upload til Simply (FTPS)
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./_deploy/
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          timeout: 120000
+
+      - name: Mangler FTP-oplysninger
+        if: env.FTP_SERVER == ''
+        run: echo "::warning::FTP_SERVER er ikke sat, så siden blev ikke uploadet til bjarvik.com."

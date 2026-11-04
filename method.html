@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{if(!sessionStorage.getItem('vanta-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro')}catch(e){}</script>
+<title>How Bjarvik scores stocks &#183; model 1.4</title>
+<meta name="description" content="Every stock starts at 100 and loses points in three steps: business, price and cracks. The full Bjarvik method, scales and guards.">
+<meta property="og:title" content="How Bjarvik scores stocks &#183; model 1.4">
+<meta property="og:description" content="Every stock starts at 100 and loses points in three steps: business, price and cracks. The full Bjarvik method, scales and guards.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bjarvik Stock Scores">
+<link rel="canonical" href="https://bjarvik.com/method.html">
+<meta property="og:url" content="https://bjarvik.com/method.html">
+<meta property="og:image" content="https://bjarvik.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bjarvik: every stock starts at 100">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#040814">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=2611042107">
+</head>
+<body>
+<div class="intro-ov" aria-hidden="true"><div class="intro-in">
+<svg class="intro-mark" viewBox="0 0 64 64" focusable="false"><defs><linearGradient id="bjvi-g" gradientUnits="userSpaceOnUse" x1="0" y1="56" x2="0" y2="10"><stop offset="0" stop-color="#4DF0A6"/><stop offset=".55" stop-color="#3CC9D6"/><stop offset="1" stop-color="#7D6BFF"/></linearGradient><mask id="bjvi-m" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><ellipse cx="41" cy="58" rx="27" ry="14" transform="rotate(-20 41 58)" fill="#000"/></mask></defs><circle cx="32" cy="33" r="23" fill="url(#bjvi-g)" mask="url(#bjvi-m)"/></svg>
+<span class="intro-word">Bjarvik</span>
+</div></div>
+<script>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;try{sessionStorage.setItem('vanta-intro','1')}catch(e){}
+var done=false;function end(){if(done)return;done=true;d.classList.add('intro-out');setTimeout(function(){d.classList.remove('intro','intro-out');var o=document.querySelector('.intro-ov');if(o)o.remove()},520)}
+setTimeout(end,2000);['click','keydown','wheel','touchstart'].forEach(function(t){addEventListener(t,end,{once:true,passive:true})})})()</script>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><nav aria-label="Main"><a class="word" href="index.html" aria-label="Bjarvik home"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><linearGradient id="bjv-g" gradientUnits="userSpaceOnUse" x1="0" y1="56" x2="0" y2="10"><stop offset="0" stop-color="#4DF0A6"/><stop offset=".55" stop-color="#3CC9D6"/><stop offset="1" stop-color="#7D6BFF"/></linearGradient><mask id="bjv-m" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><ellipse cx="41" cy="58" rx="27" ry="14" transform="rotate(-20 41 58)" fill="#000"/></mask></defs><circle cx="32" cy="33" r="23" fill="url(#bjv-g)" mask="url(#bjv-m)"/></svg><span>Bjarvik</span></a><span class="links"><a href="index.html">Overview</a><a href="rankings.html">Rankings</a><a href="penny.html">Penny <span class="wide">stocks</span></a><a href="portfolio.html">Portfolio</a><a href="method.html" aria-current="page">Method</a><a class="ig" href="https://www.instagram.com/vanta.analyst/" rel="noopener">Instagram</a></span>
+<div class="gs " id="gs-top" data-rel=""><button class="gs-btn" type="button" aria-label="Search stocks"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class="gs-box"><input type="search" placeholder="Search stocks…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="gs-top-res" aria-label="Search stocks by name"><ul class="gs-res" id="gs-top-res" role="listbox" hidden></ul></div></div></nav></header>
+<div class="wrap narrow">
+<main id="main">
+<p class="crumbs"><a href="index.html">All scores</a> · Method</p>
+<header class="hero">
+  <h1>Every stock starts at <em>100</em>. Then it has to earn it.</h1>
+  <p class="lede">Bjarvik is a critical scoring framework. Instead of hunting for reasons to like a stock, it looks for reasons to take points away, and only gives points back for strengths that are documented. 829 stocks are scored so far, on model 1.4.</p>
+</header>
+
+<div class="prose">
+  <h2>Three steps, each with a ceiling</h2>
+  <p>Every deduction is tied to a finding and a source, shown on each company's page. One event is only deducted once. A criterion without data gives 0, so the score is a ceiling, not a floor.</p>
+  <div class="method">
+    <div><h3>1 · Business <span class="neg num">max −30</span></h3><p>Is the company getting stronger, not just bigger? Margins, return on invested capital, the segment that has to carry the future, the moat, the quality of growth and how management allocates capital.</p></div>
+    <div><h3>2 · Price <span class="neg num">max −35</span></h3><p>Today's multiples against the company's own 5–10-year history and its peers. A great business can still be a bad price.</p></div>
+    <div><h3>3 · Cracks <span class="neg num">max −35</span></h3><p>What sits behind the headline numbers: cash flow, customer concentration and behaviour, execution, governance, debt, insider trading, guidance and macro exposure.</p></div>
+    <div><h3>Plus <span class="pos num">max +15</span></h3><p>Only documented strengths, such as insider buying, raised guidance, net cash or a widely spread customer base.</p></div>
+  </div>
+  <p>Data rules for the three steps (since model 1.3): forward multiples are compared with forward history and trailing with trailing. Free cash flow is measured after lease payments and capitalised development, and cash excludes customer prepayments. One-off gains and losses are removed from the earnings a multiple is based on. Spin-offs and mergers are judged on the company's own pro forma figures for 12 months. Buybacks and dividends only count as a strength when free cash flow covers them; for banks and insurers net profit is used instead.</p>
+
+  <h2>Three data-driven adjustments</h2>
+  <p>Since model 1.2 three adjustments are added from market data that is refreshed every week. The final score is held between 1 and 100.</p>
+  <p class="num"><strong>Score = 100 − Business − Price − Cracks + Plus + PEG points + Upside points + Revision points</strong></p>
+
+  <h3>PEG points (−12 to +8)</h3>
+  <p>PEG is the forward P/E divided by expected earnings growth. It asks: how much are you paying for the growth?</p>
+  <table class="scale num"><thead><tr><th>PEG</th><th>Points</th></tr></thead><tbody>
+    <tr><td>Below 0.5</td><td class="pos">+8</td></tr><tr><td>0.5–0.75</td><td class="pos">+6</td></tr><tr><td>0.75–1</td><td class="pos">+3</td></tr>
+    <tr><td>1–1.5</td><td>±0</td></tr><tr><td>1.5–2</td><td class="neg">−4</td></tr><tr><td>2–3</td><td class="neg">−8</td></tr><tr><td>Above 3</td><td class="neg">−12</td></tr><tr><td>Not available</td><td class="neg">−6</td></tr>
+  </tbody></table>
+  <p>When the data source shows no PEG for a profitable company (common for small caps, banks and insurers), Bjarvik calculates it from the P/E ratios: forward P/E divided by the expected earnings growth, where growth is the trailing P/E over the forward P/E, minus 1. Because reported and adjusted earnings make that estimate noisy, a calculated PEG gives between −6 (the same as a missing PEG) and +3 points. If that growth is zero or negative, the PEG counts as not available. <em>(Since model 1.3.)</em></p>
+  <p>Guards: positive PEG points are removed for loss-making companies, when the trailing P/E is more than twice the forward P/E (earnings expected to bounce), and for cyclical companies at a peak. Positive PEG points are capped at +3 when the price is 20% or more below its 200-day average, because earnings estimates tend to lag a sharp fall.</p>
+  <p>A PEG above 10 means expected growth is close to zero, so it counts as not available (−6) instead of −12. A missing PEG also counts as not available. Positive PEG points are capped at +3 when the trailing P/E is below the forward P/E, because a one-off gain in reported earnings (or earnings that are expected to fall) makes the PEG look cheaper than it is. For banks, insurers and financial data companies positive PEG points are halved: their earnings growth follows the interest-rate cycle, and a low P/E is the sector's normal level. <em>(Since model 1.4.)</em></p>
+
+  <h3>Upside points (−10 to +10)</h3>
+  <p>Upside is the median analyst price target divided by the price, minus 1. The median is used instead of the average, so one extreme target cannot move it.</p>
+  <table class="scale num"><thead><tr><th>Upside to median target</th><th>Points</th></tr></thead><tbody>
+    <tr><td>Below 0%</td><td class="neg">−10</td></tr><tr><td>0–10%</td><td class="neg">−5</td></tr><tr><td>10–20%</td><td>±0</td></tr>
+    <tr><td>20–35%</td><td class="pos">+4</td></tr><tr><td>35–50%</td><td class="pos">+7</td></tr><tr><td>Above 50%</td><td class="pos">+10</td></tr>
+  </tbody></table>
+  <p>Analyst targets are historically too optimistic, so positive upside points are cut back:</p>
+  <ul>
+    <li>halved when fewer than 10 analysts cover the stock</li>
+    <li>halved again when the targets are widely spread (high minus low is more than the median)</li>
+    <li>capped at +4 when the stock has fallen 25% or more in a year, or when the price is 20% or more below its 200-day average (a recent fall that a one-year number can miss), because targets tend to lag a fall</li>
+    <li>set to 0 when the upside is above 100%, because a target that far above the price is almost always stale after a share issue, a reverse split or a collapse <em>(since model 1.4)</em></li>
+    <li>set to 0 when the price is more than 30 days old.</li>
+  </ul>
+
+  <h3>Revision points (−6 to +6)</h3>
+  <p>How analysts' earnings-per-share estimate for the next year has moved over the last 4–13 weeks. Rising estimates add points; falling estimates take them away. Bjarvik keeps its own log of estimates, so revision points appear once a stock has at least four weeks of history.</p>
+
+  <h3>Special situations</h3>
+  <p>When a company is under a binding takeover or merger agreement or a formal tender or exchange offer, or its shares are suspended or being delisted, the price follows the deal terms, not the business. Bjarvik then sets PEG, upside and revision points to 0 and keeps the stock out of the 70+ zone. A non-binding approach is mentioned in the caveats but does not count. <em>(Since model 1.4.)</em></p>
+
+  <h2>How to read a score</h2>
+  <ul>
+    <li><strong>70+ with more than 20% upside</strong> is what we call the 70+ zone: a strong business at a price analysts still see room above.</li>
+    <li><strong>50–70</strong> usually means a good business with a real question mark: the price, a crack, or both.</li>
+    <li><strong>Below 50</strong> means the model found several serious problems. It does not mean the stock will fall.</li>
+  </ul>
+  <p>A score is a starting point for your own research, not a buy or sell signal. The model is evaluated every month against how the stocks actually performed, and changes are logged as new versions.</p>
+
+  <h2 id="horizon">Your holding period</h2>
+  <p>How long you plan to hold changes which points matter most. Over a short hold, today's price and the analysts' 12-month signals move a stock the most. Over a long hold, the quality of the business decides most of the result, and today's multiple matters less because earnings have time to grow into it or away from it.</p>
+  <p>The holding-period slider on company pages and in the rankings re-weights the same findings. It adds nothing new and leaves the Bjarvik score unchanged. At 3 years the view equals the Bjarvik score.</p>
+  <ul>
+    <li><strong>Business (step 1):</strong> 0.75× at 1 year, 1× at 3 years, 1.4× at 10 years.</li>
+    <li><strong>Price (step 2):</strong> 1.25× at 1 year, 1× at 3 years, 0.6× at 10 years.</li>
+    <li><strong>Upside and revision points</strong> (12-month analyst signals): 1.4× at 1 year, 1× at 3 years, 0.25× at 10 years.</li>
+    <li><strong>Cracks (step 3), plus points and PEG points</strong> count the same at every horizon: a broken balance sheet or a governance problem hurts whether you hold for one year or ten.</li>
+  </ul>
+  <p>Weights change smoothly between those points. The result is kept between 1 and 100. The weights are a simple rule of thumb, not a tested forecast: a long holding period does not make a weak business safe.</p>
+
+  <h2>Data and updates</h2>
+  <p>Prices, analyst targets, PEG, P/E, 52-week changes and 200-day averages come from stockanalysis.com and are refreshed every Saturday. Findings are researched per company and link to their sources. Each company page shows the date of its price.</p>
+</div>
+
+</main>
+<footer>
+  <p class="big">Not investment advice. Bjarvik is an analysis framework that scores companies; it does not tell anyone what to buy or sell.</p>
+  <p>Prices, analyst targets, PEG and P/E: stockanalysis.com. Penny-stock data: Nordnet and company reports. Findings link to their sources. Logos are trademarks of their owners; Bjarvik is not affiliated with any company shown.</p>
+  <nav class="footnav" aria-label="Site"><a href="index.html">Overview</a><a href="rankings.html">Rankings</a><a href="penny.html">Penny stocks</a><a href="portfolio.html">Portfolio builder</a><a href="method.html">Method</a></nav>
+</footer>
+</div>
+<script src="assets/index.js?v=2611042107" defer></script>
+<script src="assets/site.js?v=2611042107" defer></script>
+</body>
+</html>
