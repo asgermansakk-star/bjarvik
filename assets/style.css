@@ -984,10 +984,10 @@ dl.facts div{border-bottom-color:rgba(238,243,250,.07)}
   .topbar .links a::before{width:21px;height:21px}
 }
 
-/* ---------- nordlys (Nov 2026): mørk navy under et nordlys, Inter Tight + Instrument Serif, smallere sidepanel ----------
+/* ---------- nordlys (Nov 2026): mørk navy under et nordlys, Inter Tight + Playfair Display (de store tal, fra 4/11), smallere sidepanel ----------
    Farverne er skiftet i hele filen (moss → navy/nordlys); dette lag sætter skrift, himmel og den nye forside. */
 :root{
-  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
   --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --aur-g:#4DF0A6; --aur-t:#3CC9D6; --aur-hl1:#BFFBE0; --aur-hl2:#9DEBF2;
 }
@@ -1083,3 +1083,7 @@ html.intro .intro-mark circle{animation:bjvRise .9s cubic-bezier(.23,1,.32,1) .1
 @keyframes bjvRise{to{transform:none;opacity:1}}
 .intro-word{font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:.24em;text-transform:uppercase}
 html.intro .intro-word{animation-delay:.8s}
+
+/* Playfair Display (4/11-2026): dens standardtal er gammeldags (70 hænger under linjen). lnum giver tal i lige højde overalt
+   og arves, så det virker også, hvor et element selv sætter tabular-nums. */
+body{font-feature-settings:"lnum" 1}
