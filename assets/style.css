@@ -984,20 +984,22 @@ dl.facts div{border-bottom-color:rgba(238,243,250,.07)}
   .topbar .links a::before{width:21px;height:21px}
 }
 
-/* ---------- nordlys (Nov 2026): mørk navy under et nordlys, Inter Tight + Playfair Display (de store tal, fra 4/11), smallere sidepanel ----------
+/* ---------- nordlys (Nov 2026): mørk navy under et nordlys, Montserrat (fra 5/11, før Inter Tight) + Playfair Display (de store tal, fra 4/11), smallere sidepanel ----------
    Farverne er skiftet i hele filen (moss → navy/nordlys); dette lag sætter skrift, himmel og den nye forside. */
 :root{
   --serif:"Playfair Display",Georgia,"Times New Roman",serif;
-  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --aur-g:#4DF0A6; --aur-t:#3CC9D6; --aur-hl1:#BFFBE0; --aur-hl2:#9DEBF2;
 }
 html{background:#040814}
+/* knapper og felter arver ikke skrift af sig selv (fx "Add to portfolio" og søgeknappen stod i Arial) */
+button,input,select,textarea{font-family:inherit}
 body{position:relative}
 /* himlen: nordlyset øverst på siden (ruller med), toner ud til siderne og nedad uden kant */
 body::before{position:absolute;inset:auto;left:0;right:0;top:-70px;height:620px;
-  background:url("aurora.svg") center top/100% 100% no-repeat,
-    radial-gradient(70% 60% at 58% 20%,rgba(77,240,166,.08),transparent 75%),
-    linear-gradient(180deg,#071027,rgba(4,8,20,0));
+  /* aurora.webp er færdigtegnet: aurora.svg over radial-gradient(70% 60% at 58% 20%,rgba(77,240,166,.08),transparent 75%),
+     linear-gradient(180deg,#071027,rgba(4,8,20,0)) og #040814 (se kommentaren ved "nordlyset bevæger sig") */
+  background:url("aurora.webp") center top/100% 100% no-repeat;
   -webkit-mask:linear-gradient(90deg,transparent,#000 18%,#000 84%,transparent),linear-gradient(180deg,#000 0 30%,rgba(0,0,0,.45) 55%,transparent 82%);
   -webkit-mask-composite:source-in;
   mask:linear-gradient(90deg,transparent,#000 18%,#000 84%,transparent),linear-gradient(180deg,#000 0 30%,rgba(0,0,0,.45) 55%,transparent 82%);
@@ -1060,16 +1062,23 @@ h3{font-family:var(--sans);font-weight:600}
 @media (max-width:760px){.aur-hero{padding-top:40px}.aur-hero .ctas{margin-top:28px}.bento{margin-top:32px}}
 p.note.aur-note{text-align:center;max-width:none}
 
-/* nordlyset bevæger sig: to lag med hver sit støjmønster, der glider langsomt modsat hinanden og skifter styrke.
+/* nordlyset (5/11-2026): de to lag er færdigtegnede billeder i stedet for SVG'er med filtre. aurora.svg og aurora-2.svg
+   (feTurbulence + feDisplacementMap) kostede 0,4-1,5 s CPU pr. lag at tegne ved hver sidevisning, mest på Retina og iPhone.
+   aurora.webp: hele body::before-laget (SVG + de to gradienter) tegnet på #040814 i 1440×620, så det er uigennemsigtigt og lille.
+   aurora-2.webp: aurora-2.svg tegnet på sort; mix-blend-mode:screen lægger det oven på som før (sort = ingen ændring).
+   Tegnet på et Chromium-lærred og pakket med cwebp -q 80 -m 6 -sharp_yuv. SVG'erne ligger stadig i assets som kilde:
+   ret i dem, tegn igen og giv billedet et nyt navn (billeder caches i timer).
+   Nordlyset bevæger sig: to lag med hver sit støjmønster, der glider langsomt modsat hinanden og skifter styrke.
    Kun transform og opacity animeres (billig på GPU'en); stilstand ved reduceret bevægelse. */
 body::before,body::after{will-change:transform,opacity;transform-origin:50% 0}
 body::before{animation:aurA 38s ease-in-out infinite alternate}
 body::after{display:block;content:"";position:absolute;inset:auto;left:0;right:0;top:-70px;height:620px;z-index:-1;pointer-events:none;
-  background:url("aurora-2.svg") center top/100% 100% no-repeat;
+  background:url("aurora-2.webp") center top/100% 100% no-repeat;
   -webkit-mask:linear-gradient(90deg,transparent,#000 18%,#000 84%,transparent),linear-gradient(180deg,#000 0 30%,rgba(0,0,0,.45) 55%,transparent 82%);
   -webkit-mask-composite:source-in;
   mask:linear-gradient(90deg,transparent,#000 18%,#000 84%,transparent),linear-gradient(180deg,#000 0 30%,rgba(0,0,0,.45) 55%,transparent 82%);
   mask-composite:intersect;
+  mix-blend-mode:screen;
   opacity:.25;animation:aurB 27s ease-in-out infinite alternate,aurPulse 8s ease-in-out infinite alternate}
 @keyframes aurA{0%{transform:translate3d(-4%,0,0) scaleY(1)}50%{transform:translate3d(1%,0,0) scaleY(1.08)}100%{transform:translate3d(4%,0,0) scaleY(.96)}}
 @keyframes aurB{0%{transform:translate3d(5%,0,0) scaleY(1.06)}100%{transform:translate3d(-5%,0,0) scaleY(.95)}}

@@ -6,3 +6,13 @@ RewriteRule ^\.well-known/ - [L]
 RewriteCond %{HTTP_HOST} !^bjarvik\.com$ [NC,OR]
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://bjarvik.com%{REQUEST_URI} [R=301,L]
+
+# Cache (5/11-2026): CSS og JS hentes altid som ...?v=<build-id>, så en ny build får nye adresser.
+# Derfor kan browseren gemme dem et år uden at spørge serveren igen (Simplys standard er 10 min, hvorefter
+# style.css skulle genvalideres før hver side kunne tegnes). Billeder og HTML beholder Simplys standard.
+# Kun mod_headers (samme AllowOverride FileInfo som RewriteRule ovenfor); IfModule, så intet går i stykker uden den.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
