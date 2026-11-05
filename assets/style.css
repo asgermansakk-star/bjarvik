@@ -1096,3 +1096,67 @@ html.intro .intro-word{animation-delay:.8s}
 /* Playfair Display (4/11-2026): dens standardtal er gammeldags (70 hænger under linjen). lnum giver tal i lige højde overalt
    og arves, så det virker også, hvor et element selv sætter tabular-nums. */
 body{font-feature-settings:"lnum" 1}
+
+/* ---------- forside og dock (6/11-2026) ----------
+   Inspireret af en ren fintech-forside: et lille mærke over en tynd overskrift i to linjer, én mintgrøn knap og en lysende
+   linje i bunden af toppen, her antallet af aktier pr. score (bygges af byg-site.ps1). På computer bliver sidepanelet til en
+   topbjælke med en hårlinje og en svævende dock i bunden, ligesom telefonens fanebjælke. */
+.aur-hero{display:flex;flex-direction:column;align-items:center;min-height:min(800px,calc(100svh - 110px));padding-top:clamp(36px,8vh,88px)}
+.aur-hero .badge{display:inline-flex;align-items:center;gap:9px;margin:0 0 26px;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:500;color:var(--body);
+  background:var(--lg-lens);box-shadow:var(--lg-spec),inset 0 0 0 1px rgba(255,255,255,.08)}
+.aur-hero .badge i{width:7px;height:7px;border-radius:50%;background:var(--aur-g);box-shadow:0 0 10px var(--aur-g)}
+.aur-hero h1{font-size:clamp(36px,5.2vw,62px);font-weight:400;line-height:1.14;letter-spacing:-.035em;text-wrap:balance}
+.aur-hero .lede{max-width:48ch;margin:22px auto 0;color:var(--lichen);font-size:16px;line-height:1.6;text-wrap:pretty}
+.aur-hero .ctas{margin-top:32px}
+.aur-hero .ctas .btn.go{gap:10px;padding:13px 20px 13px 24px;background:var(--aur-g);color:#04130C;font-weight:600;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 10px 34px -8px rgba(77,240,166,.6)}
+@media (hover:hover) and (pointer:fine){.aur-hero .ctas .btn.go:hover{background:var(--aur-hl1);color:#04130C}}
+.aur-hero .ctas .txt{color:var(--body)}
+.ridge{position:relative;width:100%;margin:auto 0 0;padding-top:52px}
+.ridge svg{display:block;width:100%;height:clamp(120px,22vh,210px);overflow:visible;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ridge .r-area{opacity:.5}.ridge .r-area.hi{opacity:1}
+.ridge .r-line{stroke:var(--aur-g);stroke-width:1.6;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(77,240,166,.55))}
+.ridge .r-70{stroke:rgba(77,240,166,.4);stroke-width:1;stroke-dasharray:3 4}
+.ridge .r-lab{position:absolute;top:30px;margin-left:8px;font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--aur-g)}
+.ridge .r-cap{position:absolute;top:30px;left:7%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ridge figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bento{margin-top:40px}
+@media (max-width:760px){
+  .aur-hero{min-height:0;padding-top:28px}
+  .aur-hero .badge{margin-bottom:20px}
+  .aur-hero .lede{font-size:15px}
+  .aur-hero .ctas{flex-direction:row;gap:10px}
+  .ridge{padding-top:40px}.ridge .r-lab{top:20px}
+}
+
+@media (min-width:761px){
+  :root{--side:0px}
+  body{padding-left:16px;padding-bottom:120px}
+  .topbar{position:relative;left:auto;top:auto;bottom:auto;width:auto;margin:0 -16px;padding:0 16px}
+  .topbar nav,html.lg-scrolled .topbar nav{height:76px;max-width:1120px;margin:0 auto;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:0;border-radius:0}
+  .topbar nav::before{display:none}
+  /* hårlinjen under topbjælken med en lille lodret streg i hver ende */
+  .topbar nav::after{content:"";position:absolute;top:auto;left:0;right:0;bottom:0;height:7px;padding:0;border-radius:0;-webkit-mask:none;mask:none;border-bottom:1px solid rgba(238,243,250,.12);pointer-events:none;
+    background:linear-gradient(rgba(238,243,250,.35),rgba(238,243,250,.35)) left bottom/1px 7px no-repeat,linear-gradient(rgba(238,243,250,.35),rgba(238,243,250,.35)) right bottom/1px 7px no-repeat}
+  .topbar .word{padding:0}.topbar .word span{display:inline}.topbar .word .mark{width:24px}
+  .topbar .gs{order:0;position:relative;width:250px}
+  .topbar .gs-btn{display:none}
+  .topbar .gs .gs-box{display:block;position:static;width:auto}
+  .topbar .gs .gs-box input[type=search]{width:100%;padding-top:9px;padding-bottom:9px;background-color:var(--lg-lens);box-shadow:var(--lg-spec)}
+  .topbar .gs-res{left:auto;right:0;width:340px}
+  .topbar .links{position:fixed;z-index:40;left:50%;bottom:22px;transform:translateX(-50%);order:0;flex:none;flex-direction:row;align-items:center;gap:2px;padding:6px;border-radius:999px;overflow:visible;
+    background:var(--lg-fill-float);backdrop-filter:var(--lg-blur);-webkit-backdrop-filter:var(--lg-blur);box-shadow:var(--lg-spec),inset 0 0 0 1px rgba(255,255,255,.10),0 18px 44px -12px rgba(0,0,0,.75)}
+  .topbar .links a,.topbar .links a[href$="method.html"]{flex-direction:row;justify-content:center;gap:0;margin:0;padding:11px 16px;border-radius:999px;font-size:14px;line-height:1.2}
+  .topbar .links a .wide{margin-left:.28em}
+  .topbar .links a::before{display:none}
+  .topbar .links a[aria-current]{color:var(--ink);background:none;box-shadow:none}
+  .topbar .links a[aria-current]::after{content:"";display:block;position:absolute;left:50%;right:auto;top:-6px;bottom:auto;width:24px;height:2px;margin-left:-12px;border-radius:2px;background:var(--aur-g);box-shadow:0 0 10px var(--aur-g)}
+  /* forsiden og Instagram er runde knapper i hver ende af docken; navnet står stadig i linket for skærmlæsere */
+  .topbar .links a[href$="index.html"],.topbar .links a.ig{width:44px;height:44px;padding:0;font-size:0;background:var(--lg-lens);box-shadow:var(--lg-spec)}
+  .topbar .links a[href$="index.html"]{margin-right:6px}
+  .topbar .links a.ig{margin-left:6px;color:var(--ink)}
+  .topbar .links a[href$="index.html"]::before{display:block;width:22px;height:22px;-webkit-mask:none;mask:none;background:url("icon.svg") center/contain no-repeat}
+  .topbar .links a.ig::before{display:block;width:19px;height:19px}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){@media (min-width:761px){.topbar .links{background:rgba(10,18,38,.96)}}}
