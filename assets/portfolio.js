@@ -192,6 +192,7 @@
     $('pf-checks').innerHTML = C.map(c => `<li class="${c[0]}">${esc(c[1])}</li>`).join('');
     $('pf-share').disabled = $('pf-csv').disabled = !has;
     if (screen) screen.mark();
+    document.dispatchEvent(new CustomEvent('pf:change'));
   }
 
   // ---------- share and export ----------
@@ -321,6 +322,21 @@
     screen = { mark };
     run(true);
   }
+
+  // for the stress test (assets/stress.js): read the holdings and apply its fixes
+  window.BjarvikPF = {
+    get: () => { const w = weights(); return st.h.map((x, i) => ({ slug: x.slug, w: w[i] })); },
+    cap: () => st.cap,
+    add: slug => add(slug),
+    swap: (a, b) => {
+      const h = st.h.find(x => x.slug === a); if (!h || !S.has(b) || st.h.some(x => x.slug === b)) return;
+      h.slug = b; renderRows(); update(); say(`${S.get(a).name} swapped for ${S.get(b).name}.`);
+    },
+    setShare: (slug, f) => {
+      const h = st.h.find(x => x.slug === slug), other = st.h.reduce((a, x) => a + (x === h ? 0 : x.w), 0); if (!h || !(other > 0)) return;
+      h.w = Math.max(1, Math.min(100, Math.round(f * other / (1 - f)))); renderRows(); update(); say(`${S.get(slug).name} set to about ${pct(f, 0)}.`);
+    }
+  };
 
   renderRows(); update();
   if (fromLink) {
