@@ -1230,3 +1230,7 @@ dl.st-cmp dd{margin:0;font-size:16px;font-weight:500;color:var(--ink);white-spac
 .st-steps{list-style:none;padding-left:0;counter-reset:st}
 .st-steps li > span{flex:1;position:relative;padding-left:22px}
 .st-steps li > span::before{counter-increment:st;content:counter(st) ".";position:absolute;left:0;top:0;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- sprogskift DA/EN (8/11-2026) ---------- */
+.topbar .lang{flex:none;margin-left:auto;margin-right:10px;padding:6px 11px;border:1px solid rgba(238,243,250,.18);border-radius:999px;color:var(--ink);font-size:12px;font-weight:600;letter-spacing:.12em;line-height:1;text-decoration:none}
+.topbar .lang:hover,.topbar .lang:focus-visible{border-color:var(--aur-g);color:var(--aur-g)}
