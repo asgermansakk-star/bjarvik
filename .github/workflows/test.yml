@@ -1,0 +1,94 @@
+# Testpipelinen for bjarvik.com i fire trin: unittest → integrationstest → E2E-test → performancetest.
+# Et trin kører kun, når det forrige er grønt. Kører ved push til alle andre grene end main. På main kører den som
+# første job i "Udgiv siden" (udgiv.yml), så siden kun uploades, når alle fire er grønne.
+# Testene ligger i .github/tests/, fordi udgiv-bjarvik.sh sletter alt andet, der ikke er en del af den byggede side.
+# Lokalt: cd .github/tests && npm test
+name: Test
+
+on:
+  push:
+    branches-ignore: [main]
+  workflow_call:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: .github/tests
+
+jobs:
+  unit:
+    name: 1. Unittest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .github/tests/package-lock.json
+      - run: npm ci
+      - run: npm run test:unit
+
+  integration:
+    name: 2. Integrationstest
+    needs: unit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .github/tests/package-lock.json
+      - run: npm ci
+      - run: npm run test:integration
+
+  e2e:
+    name: 3. E2E-test
+    needs: integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .github/tests/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Gem rapport og spor
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-rapport
+          path: .github/tests/test-resultater/
+          retention-days: 14
+
+  performance:
+    name: 4. Performancetest
+    needs: e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .github/tests/package-lock.json
+      - run: npm ci
+      # Lighthouse bruger den Chrome, der følger med maskinen
+      - run: npm run test:perf
+      - name: Gem Lighthouse-rapporterne
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse
+          path: .github/tests/test-resultater/lighthouse/
+          retention-days: 14

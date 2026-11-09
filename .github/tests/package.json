@@ -1,0 +1,16 @@
+{
+  "name": "bjarvik-test",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:unit": "node --test \"unit/**/*.test.mjs\"",
+    "test:integration": "node --test \"integration/**/*.test.mjs\"",
+    "test:e2e": "playwright test",
+    "test:perf": "lhci autorun",
+    "test": "npm run test:unit && npm run test:integration && npm run test:e2e && npm run test:perf"
+  },
+  "devDependencies": {
+    "@lhci/cli": "0.16.0",
+    "@playwright/test": "1.65.0"
+  }
+}

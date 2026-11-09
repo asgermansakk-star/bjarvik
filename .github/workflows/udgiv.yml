@@ -6,6 +6,7 @@
 #   FTP_USERNAME  FTP-brugernavnet til bjarvik.com fra Simply
 #   FTP_PASSWORD  FTP-adgangskoden fra Simply
 # Valgfri variabel FTP_SERVER_DIR (standard: public_html/).
+# Først kører testpipelinen (test.yml: unit → integration → E2E → performance). Siden uploades kun, når den er grøn.
 name: Udgiv siden
 
 on:
@@ -21,7 +22,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
   udgiv:
+    needs: test
     runs-on: ubuntu-latest
     # Første upload er alle ca. 1.300 filer (34 MB) og kan tage en time over FTPS. Derefter kun ændrede filer.
     timeout-minutes: 120
