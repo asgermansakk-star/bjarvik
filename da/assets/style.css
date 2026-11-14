@@ -1156,8 +1156,8 @@ body{font-feature-settings:"lnum" 1}
   .topbar .links a[href$="index.html"],.topbar .links a.ig{width:44px;height:44px;padding:0;font-size:0;background:var(--lg-lens);box-shadow:var(--lg-spec)}
   .topbar .links a[href$="index.html"]{margin-right:6px}
   .topbar .links a.ig{margin-left:6px;color:var(--ink)}
-  .topbar .links a[href$="index.html"]::before{display:block;width:22px;height:22px;-webkit-mask:none;mask:none;background:url("icon.svg") center/contain no-repeat}
-  .topbar .links a.ig::before{display:block;width:19px;height:19px}
+  .topbar .links a[href$="index.html"]::before{display:block;width:22px;height:22px;-webkit-mask:none;mask:none;background:url("icon.svg") center/contain no-repeat;margin:0}
+  .topbar .links a.ig::before{display:block;width:19px;height:19px;margin:0}
 }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){@media (min-width:761px){.topbar .links{background:rgba(10,18,38,.96)}}}
 
@@ -1234,3 +1234,8 @@ dl.st-cmp dd{margin:0;font-size:16px;font-weight:500;color:var(--ink);white-spac
 /* ---------- sprogskift DA/EN (8/11-2026) ---------- */
 .topbar .lang{flex:none;margin-left:auto;margin-right:10px;padding:6px 11px;border:1px solid rgba(238,243,250,.18);border-radius:999px;color:var(--ink);font-size:12px;font-weight:600;letter-spacing:.12em;line-height:1;text-decoration:none}
 .topbar .lang:hover,.topbar .lang:focus-visible{border-color:var(--aur-g);color:var(--aur-g)}
+
+/* ---------- Kort fortalt / In plain words (8/11-2026) ---------- */
+.plain{margin:0 0 22px;padding:18px 20px;border:1px solid rgba(77,240,166,.28);border-radius:16px;background:linear-gradient(180deg,rgba(77,240,166,.07),rgba(77,240,166,.02))}
+.plain h2{margin:0 0 6px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--aur-g)}
+.plain p{margin:0;font-size:16.5px;line-height:1.6;color:var(--ink);max-width:68ch}
