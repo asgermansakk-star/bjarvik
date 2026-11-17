@@ -60,7 +60,9 @@ for (const sti of ["/", "/rankings.html", "/portfolio.html", "/method.html", "/p
   test(`${sti} kan ikke trækkes sidelæns på mobilen`, async ({ page, isMobile }) => {
     test.skip(!isMobile, "gælder telefoner");
     await page.goto(sti);
-    const bredde = page.viewportSize().width;
-    expect(await page.evaluate(() => Math.max(document.documentElement.scrollWidth, document.body.scrollWidth))).toBeLessThanOrEqual(bredde);
+    const bred = () => page.evaluate(() => Math.max(document.documentElement.scrollWidth, document.body.scrollWidth));
+    expect(await bred()).toBeLessThanOrEqual(page.viewportSize().width);
+    await page.setViewportSize({ width: 360, height: 740 });   // smal telefon (fx iPhone SE og mindre Android)
+    expect(await bred()).toBeLessThanOrEqual(360);
   });
 }
