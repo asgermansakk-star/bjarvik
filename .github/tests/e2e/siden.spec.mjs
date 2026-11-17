@@ -53,3 +53,14 @@ test("ranglisten flyder ikke ud over skærmen", async ({ page }) => {
   await page.goto("/rankings.html");
   expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
 });
+
+// 16/11-2026: nordlyset drev ud over kanten, så siden kunne trækkes sidelæns på iPhone. Chromium klipper det væk på
+// <html> (overflow-x:clip), men Safari på iPhone lod alligevel siden glide, så body selv må ikke være bredere end skærmen.
+for (const sti of ["/", "/rankings.html", "/portfolio.html", "/method.html", "/penny.html", "/stocks/leonardo.html", "/da/", "/da/stocks/leonardo.html"]) {
+  test(`${sti} kan ikke trækkes sidelæns på mobilen`, async ({ page, isMobile }) => {
+    test.skip(!isMobile, "gælder telefoner");
+    await page.goto(sti);
+    const bredde = page.viewportSize().width;
+    expect(await page.evaluate(() => Math.max(document.documentElement.scrollWidth, document.body.scrollWidth))).toBeLessThanOrEqual(bredde);
+  });
+}

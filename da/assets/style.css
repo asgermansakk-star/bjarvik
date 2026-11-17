@@ -399,7 +399,7 @@ h2{font-size:clamp(26px,3.2vw,32px)}
 @media (max-width:760px){.split{grid-template-columns:1fr;gap:18px}}
 
 /* the map (home): score against upside */
-.mapsel select{width:auto;min-width:200px}
+.mapsel select{width:auto;min-width:200px;max-width:100%}
 .map{position:relative;margin:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0 4px;touch-action:pan-y}
 .map svg{display:block;width:100%;height:auto;overflow:visible}
 .map .grid line{stroke:var(--line);stroke-width:1}
@@ -600,6 +600,10 @@ dl.pf-facts small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflo
 
 /* ---------- brand v2: night moss, glass, Newsreader + Bricolage Grotesque ---------- */
 html{background:var(--bg);overflow-x:clip}   /* nordlysets drift (body::after) gav 50 px vandret scroll på ca. 1000 px bredde */
+/* 16/11-2026: iPhone lod stadig siden glide sidelæns, for nordlaget driver op til 5 % ud over kanten (dokumentet blev
+   394 px bredt på 375 px). Klip også på body, så laget aldrig gør siden bredere end skærmen, og stop sidelæns overscroll. */
+body{overflow-x:clip}
+html,body{overscroll-behavior-x:none}
 body{font-size:15.5px;letter-spacing:.003em;background:transparent}
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
   radial-gradient(700px 500px at 0% 22%,rgba(60,201,214,.42),transparent 70%),
@@ -1083,6 +1087,10 @@ body::after{display:block;content:"";position:absolute;inset:auto;left:0;right:0
 @keyframes aurA{0%{transform:translate3d(-4%,0,0) scaleY(1)}50%{transform:translate3d(1%,0,0) scaleY(1.08)}100%{transform:translate3d(4%,0,0) scaleY(.96)}}
 @keyframes aurB{0%{transform:translate3d(5%,0,0) scaleY(1.06)}100%{transform:translate3d(-5%,0,0) scaleY(.95)}}
 @keyframes aurPulse{0%{opacity:.2}100%{opacity:.85}}
+/* 16/11-2026: på mobilen driver lagene ikke sidelæns (kun stræk og puls), for Safari på iPhone lod siden glide med */
+@keyframes aurAm{0%{transform:scaleY(1)}50%{transform:scaleY(1.08)}100%{transform:scaleY(.96)}}
+@keyframes aurBm{0%{transform:scaleY(1.06)}100%{transform:scaleY(.95)}}
+@media (max-width:760px){body::before{animation-name:aurAm}body::after{animation-name:aurBm,aurPulse}}
 @media (max-width:760px){body::after{height:460px;-webkit-mask:linear-gradient(180deg,#000 0 30%,rgba(0,0,0,.45) 55%,transparent 82%);mask:linear-gradient(180deg,#000 0 30%,rgba(0,0,0,.45) 55%,transparent 82%)}}
 @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}body::after{opacity:.5}}
 
